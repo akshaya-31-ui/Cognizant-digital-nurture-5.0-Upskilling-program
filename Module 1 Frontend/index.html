@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local Community Event Portal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <style>
+    #welcomeBanner {
+      background-color: #007BFF;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="authContainer" class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card p-4 shadow-lg border-0 rounded-3 w-100" style="max-width: 450px;">
+      <div class="text-center mb-4">
+        <i class="bi bi-people-fill text-primary display-3"></i>
+        <h2 class="fw-bold mt-2">Community Portal</h2>
+        <p class="text-muted lead fs-6">Connect with your neighborhood events</p>
+      </div>
+      
+      <ul class="nav nav-pills nav-justified mb-3" id="authTabs" role="tablist">
+        <li class="nav-item">
+          <button class="nav-link active" id="tab-login" data-bs-toggle="pill" data-bs-target="#pane-login" type="button">Login</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" id="tab-signup" data-bs-toggle="pill" data-bs-target="#pane-signup" type="button">Sign Up</button>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="pane-login">
+          <form id="loginForm">
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control" id="loginEmail" placeholder="name@example.com" required>
+              <label for="loginEmail">Email address</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="password" class="form-control" id="loginPassword" placeholder="Password" required>
+              <label for="loginPassword">Password</label>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 py-2 fw-bold text-uppercase">Sign In</button>
+          </form>
+        </div>
+        
+        <div class="tab-pane fade" id="pane-signup">
+          <form id="signupForm">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="signupName" placeholder="Your Name" required>
+              <label for="signupName">Full Name</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control" id="signupEmail" placeholder="name@example.com" required>
+              <label for="signupEmail">Email address</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="password" class="form-control" id="signupPassword" placeholder="Password" required>
+              <label for="signupPassword">Password</label>
+            </div>
+            <button type="submit" class="btn btn-success w-100 py-2 fw-bold text-uppercase">Create Account</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="portalDashboard" class="d-none">
+    
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top shadow-sm px-3">
+      <div class="container-fluid">
+        <a class="navbar-brand fw-bold text-gradient d-flex align-items-center" href="#">
+          <i class="bi bi-building-fill-check me-2"></i> CivicHub
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0 flex-column flex-md-row">
+            <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#events-section">Events</a></li>
+            <li class="nav-item"><a class="nav-link" href="#gallery-section">Gallery</a></li>
+            <li class="nav-item"><a class="nav-link" href="#bulletin-section">Bulletin</a></li>
+          </ul>
+          <div class="d-flex align-items-center gap-2">
+            <input class="form-control form-control-sm" type="search" id="quickSearchInput" placeholder="Quick Search (Keydown)..." aria-label="Search">
+            <button class="btn btn-sm btn-outline-danger" id="btnLogout" title="Log Out"><i class="bi bi-box-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div id="welcomeBanner" class="p-3 shadow-sm text-center fw-bold transition-all">
+      </div>
+
+    <main class="container my-4">
+      
+      <div class="row g-4 mb-4">
+        <aside class="col-md-3">
+          <div class="card p-3 shadow-sm border-0 bg-light">
+            <h5 class="fw-bold mb-3 text-uppercase fs-6">Controls & Filters</h5>
+            <div class="mb-3">
+              <label for="categoryFilter" class="form-label small font-weight-bold">Category Select</label>
+              <select class="form-select form-select-sm" id="categoryFilter">
+                <option value="all">All Categories</option>
+                <option value="music">Music Events</option>
+                <option value="education">Education & Workshops</option>
+                <option value="social">Social Gatherings</option>
+              </select>
+            </div>
+            
+            <div class="d-grid gap-2 mb-3">
+              <button class="btn btn-sm btn-primary" id="btnFindLocation">
+                <i class="bi bi-geo-alt-fill me-1"></i> Find Nearby Events
+              </button>
+              <button class="btn btn-sm btn-outline-secondary" id="btnClearPreferences">
+                <i class="bi bi-trash3-fill me-1"></i> Clear Preferences
+              </button>
+            </div>
+            <div id="geoOutput" class="alert alert-info p-2 small d-none m-0"></div>
+          </div>
+        </aside>
+
+        <section class="col-md-9">
+          <div class="p-4 bg-dark text-white rounded-3 shadow position-relative overflow-hidden bg-gradient mb-4">
+            <div class="row align-items-center">
+              <div class="col-lg-7">
+                <h1 class="display-5 fw-bold text-capitalize">Town Hall Video Broadcast</h1>
+                <p class="lead text-muted text-light-50">Watch our interactive promo video before signing up for regional events.</p>
+                <span class="badge bg-warning text-dark highlight p-2 mb-2">Special Offer: Early bird registration passes active!</span>
+              </div>
+              <div class="col-lg-5">
+                <video id="promoVideo" class="w-100 rounded border border-secondary shadow-sm" controls>
+                  <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <div id="videoStatus" class="text-end small text-warning mt-1"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <hr class="my-5">
+
+      <section id="events-section" class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 class="fw-bold m-0"><i class="bi bi-calendar3 me-2 text-primary"></i>Upcoming Neighborhood Events</h2>
+          <div id="loadingSpinner" class="spinner-border spinner-border-sm text-primary d-none" role="status"></div>
+        </div>
+        
+        <div id="closureTrackerBox" class="alert alert-secondary p-2 mb-3 small d-flex flex-wrap gap-3 align-items-center shadow-sm">
+          <strong><i class="bi bi-bar-chart-fill me-1 text-primary"></i> Category Registration Counters (Closure Session Tracker):</strong>
+          <span id="count-music" class="badge bg-dark">Music: 0</span>
+          <span id="count-education" class="badge bg-dark">Education: 0</span>
+          <span id="count-social" class="badge bg-dark">Social: 0</span>
+        </div>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4" id="eventsGridContainer">
+          </div>
+      </section>
+
+      <hr class="my-5">
+
+      <section id="gallery-section" class="mb-5 bg-light p-4 rounded-3 shadow-sm">
+        <h3 class="fw-bold mb-3 text-center"><i class="bi bi-images me-2 text-success"></i>Past Communities Gallery</h3>
+        <div class="table-responsive">
+          <table class="table table-bordered align-middle text-center m-0 bg-white shadow-xs">
+            <caption>Table representation of archival historic council meetings</caption>
+            <thead>
+              <tr class="table-dark">
+                <th>District North</th>
+                <th>District Central</th>
+                <th>District South</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <img src="https://picsum.photos/id/101/300/200" alt="Baking Workshop Archive" title="Baking Workshop" class="img-fluid rounded border shadow-sm img-gallery-thumbnail">
+                </td>
+                <td>
+                  <img src="https://picsum.photos/id/102/300/200" alt="Music Festival Gathering" title="Music Fest Weekend" class="img-fluid rounded border shadow-sm img-gallery-thumbnail">
+                </td>
+                <td>
+                  <img src="https://picsum.photos/id/103/300/200" alt="Town Hall Debates" title="Town Hall Debate" class="img-fluid rounded border shadow-sm img-gallery-thumbnail">
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img src="https://picsum.photos/id/104/300/200" alt="Local Tree Planting Event" title="Green Tree Plantation" class="img-fluid rounded border shadow-sm img-gallery-thumbnail">
+                </td>
+                <td>
+                  <img src="https://picsum.photos/id/145/300/200" alt="Art Exhibition Night" title="Art Guild Exposition" class="img-fluid rounded border shadow-sm img-gallery-thumbnail">
+                </td>
+                <td>
+                  <img src="https://picsum.photos/id/152/300/200" alt="Charity Marathon Meetup" title="Annual Charity Run" class="img-fluid rounded border shadow-sm img-gallery-thumbnail">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <hr class="my-5">
+
+      <section id="bulletin-section" class="mb-5">
+        <h3 class="fw-bold mb-3"><i class="bi bi-newspaper me-2 text-info"></i>Community Weekly Bulletin</h3>
+        <article class="newspaper-columns p-3 border rounded bg-white shadow-sm">
+          <h4 class="fw-bold text-primary">Mayor Confirms New Expansion Grants</h4>
+          <p class="text-muted small">Published June 3, 2026 by Council Media relations Representative</p>
+          <p>Our municipality successfully launched programmatic development updates across regional zones today. Substantial capital reserves have been allocated directly toward financing accessible neighborhood community portals, offering optimized avenues for civic registration processes and data integration strategies. Local authorities emphasize that utilizing modular open-source architectures establishes deep-seated digital parity among citizens.</p>
+          <p>Additionally, modern structural styles utilizing advanced utility frameworks guarantee cross-platform readability over various electronic screen sizes. Continuous infrastructural tracking arrays are deployed across municipal grids to monitor ongoing usage and systematically process localized community interactions in real-time.</p>
+        </article>
+      </section>
+      
+      <section class="mb-5">
+        <h4 class="fw-bold mb-3">Portal Rules & General Information</h4>
+        <div class="accordion shadow-sm" id="portalAccordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                How do I handle interactive seats registration limits?
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#portalAccordion">
+              <div class="accordion-body text-muted">
+                Each operational event preserves designated seats. Attempting to fulfill registration procedures while standard quotas are exhausted will instantly prompt conditional handling mechanisms.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button class-collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                Where can I get advanced procedural technical assistance?
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#portalAccordion">
+              <div class="accordion-body">
+                Please follow documentation steps linked inside our dedicated system asset platform. Open <a href="help.html" target="_blank" class="fw-bold text-decoration-none">Help Workspace Resource Center</a> for complete breakdowns.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-dark text-white text-center py-4 mt-auto border-top border-secondary position-relative bottom-0 w-100">
+      <div class="container">
+        <p class="mb-2">&copy; 2026 Local City Council Regional Association. All Rights Reserved.</p>
+        <div class="d-flex justify-content-center gap-3 fs-4 mb-2">
+          <a href="#" class="text-white hover-opacity"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="text-white hover-opacity"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" class="text-white hover-opacity"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="text-white hover-opacity"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg">
+        <div class="modal-header bg-gradient bg-primary text-white">
+          <h5 class="modal-title fw-bold" id="registrationModalLabel">Event Registration Signup Form</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          
+          <div id="modalAlertBox" class="alert d-none py-2 px-3 small mb-3"></div>
+
+          <form id="eventRegisterForm" novalidate>
+            <input type="hidden" id="formTargetEventId">
+
+            <div class="mb-3">
+              <label for="regEventName" class="form-label small fw-bold">Selected Event</label>
+              <input type="text" class="form-control bg-light" id="regEventName" readonly>
+            </div>
+
+            <div class="mb-3">
+              <label for="regFullName" class="form-label small fw-bold">Full Name</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                <input type="text" class="form-control" id="regFullName" placeholder="John Doe" required autofocus>
+              </div>
+              <div class="invalid-feedback id-error-fullName">Please input a valid name string.</div>
+            </div>
+
+            <div class="mb-3">
+              <label for="regEmail" class="form-label small fw-bold">Email Address</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-envelope-at-fill"></i></span>
+                <input type="email" class="form-control" id="regEmail" placeholder="name@domain.com" required>
+              </div>
+              <div class="invalid-feedback id-error-email">Please input a formal email reference.</div>
+            </div>
+
+            <div class="row g-3 mb-3">
+              <div class="col-sm-6">
+                <label for="regDate" class="form-label small fw-bold">Reservation Date</label>
+                <input type="date" class="form-control" id="regDate" required>
+                <div class="invalid-feedback">Date required.</div>
+              </div>
+              <div class="col-sm-6">
+                <label for="regCategory" class="form-label small fw-bold">Event Group Category</label>
+                <select class="form-select" id="regCategory" required>
+                  <option value="" disabled selected>Choose type...</option>
+                  <option value="music">Music</option>
+                  <option value="education">Education</option>
+                  <option value="social">Social</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="regMessage" class="form-label small fw-bold">Special Requests / Feedback Messages</label>
+              <textarea class="form-control" id="regMessage" rows="2" placeholder="Tell us your preferences..."></textarea>
+              <div class="text-end text-muted mt-1" style="font-size: 0.75rem;" id="charCounter">0 characters</div>
+            </div>
+
+            <div class="form-check mb-3">
+              <input class="form-check-input" type="checkbox" value="" id="regTerms" required>
+              <label class="form-check-label small text-muted" for="regTerms">
+                I accept localized municipal processing guidelines.
+              </label>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2 pt-2 border-top">
+              <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-sm btn-primary px-4 fw-bold" id="btnSubmitForm">Confirm & Register</button>
+            </div>
+            
+            <output id="formConfirmationOutput" class="d-none alert alert-success mt-3 small text-center fw-bold"></output>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

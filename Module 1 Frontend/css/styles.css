@@ -1,0 +1,110 @@
+/* =========================================================================
+   CSS3 Style Core Architecture Engine - Local Community Event Portal
+   ========================================================================= */
+
+/* Universal Reset Rule to cleanly zero out browser default parameters */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base Body Styles and Global Typography Configuration */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f4f6f9;
+  color: #333333;
+  min-height: 100vh;
+  transition: background 0.3s ease-in-out;
+}
+
+/* Styled text gradient utility targeting main identity logos */
+.text-gradient {
+  background: linear-gradient(45deg, #007bff, #00d2ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Target Elements Grouping Selectors rules mapping basic header layouts */
+h1, h2, h3, h4 {
+  color: #212529;
+  letter-spacing: -0.02em;
+}
+
+/* Structured Selector Class mapping structural content card layouts */
+.eventCard {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border: 1px solid rgba(0,0,0,0.1) !important;
+}
+
+.eventCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Pseudo-class Link styling declarations covering global navbar elements */
+.navbar-nav .nav-link:link,
+.navbar-nav .nav-link:visited {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.navbar-nav .nav-link:hover {
+  color: #00d2ff !important;
+}
+
+.navbar-nav .nav-link:active {
+  color: #ffffff !important;
+}
+
+/* Gallery Hover Scaling Animation Effects Elements */
+.img-gallery-thumbnail {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.img-gallery-thumbnail:hover {
+  transform: scale(1.05);
+}
+
+/* Newspaper Multi-Column Rule Layout Implementation */
+.newspaper-columns {
+  column-count: 2;
+  column-gap: 30px;
+  column-rule: 1px solid #dee2e6;
+  text-align: justify;
+}
+
+/* Form Input Element Outline Focus Tweaking Overrides */
+.form-control:focus, 
+.form-select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+  outline: 2px solid rgba(0, 123, 255, 0.5);
+}
+
+/* =========================================================================
+   Responsive Web Design Layout Adaptations (Media Queries)
+   ========================================================================= */
+@media (max-width: 767.98px) {
+  /* Restructure Newspaper Multi-Columns to stack on mobile viewports */
+  .newspaper-columns {
+    column-count: 1;
+    column-gap: 0;
+    column-rule: none;
+  }
+  
+  /* Reduce typographic header dimensions dynamically scale downwards */
+  h1 {
+    font-size: 1.75rem !important;
+  }
+  
+  h2 {
+    font-size: 1.5rem !important;
+  }
+  
+  /* Force global navigation lists links stacking vertical layouts layout elements */
+  .navbar-nav {
+    text-align: center;
+    padding-top: 1rem;
+  }
+}
