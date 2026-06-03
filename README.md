@@ -11,7 +11,7 @@ This repository contains a unified showcase of engineering competencies requeste
 The repository is organized directly around the recommended learning sequence tracks:
 1. **Module 1 (Frontend UI & Logic):** Local Community Event Portal (HTML5, CSS3, Bootstrap 5, Vanilla JavaScript, and jQuery integration).
 2. **Module 2 (Database Layer):** 25 ANSI SQL relational architecture queries.
-3. **Module 3 (Core Backend Engine):** 41 Object-Oriented Java programmatic assignments[cite: 2].
+3. **Module 3 (Core Backend Engine):** 41 Object-Oriented Java programmatic assignments.
 
 ## Repository Folder Structure
 ```
@@ -35,8 +35,7 @@ Digital-Nurture-JavaFSE/
      ├── HelloWorld.java
      ├── SimpleCalculator.java
      └── ...                     # Rest of the 41 programmatic core Java solution files 
-
-
+```
 
 ## Key Implementation Highlights
 
