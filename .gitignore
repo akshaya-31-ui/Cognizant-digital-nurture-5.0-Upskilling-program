@@ -1,0 +1,42 @@
+# Cognizant Digital Nurture 5.0 — Java FSE Portfolio
+
+### Candidate Profiles
+* **Batch:** 2027 Placement Cohort
+* **Track Assigned:** Java Full Stack Engineering (Java FSE)
+* **Upskilling Timeline:** 3-Week Comprehensive Implementation Track
+
+---
+
+## 📌 Project Overview
+This repository contains a unified showcase of engineering competencies requested during the Cognizant Digital Nurture 5.0 upskilling journey. Over a rigorous three-week period, all milestone tasks spanning client-side presentation layers, relational databases, and core algorithmic program structures were implemented, tested locally, and compiled into this structured workspace.
+
+The repository is organized directly around the recommended learning sequence tracks:
+1. **Module 1 (Frontend UI & Logic):** Local Community Event Portal (HTML5, CSS3, Bootstrap 5, Vanilla JavaScript, and jQuery patches).
+2. **Module 2 (Database Layer):** 25 ANSI SQL relational architecture queries.
+3. **Module 3 (Core Backend Engine):** 41 Object-Oriented Java programmatic assignments.
+
+---
+
+## 📂 Repository Folder Structure
+
+```text
+Digital-Nurture-JavaFSE/
+│
+├── .gitignore                   # Prevents IDE caches, compiled binaries, and .class files
+├── README.md                    # Project documentation & verification roadmap
+│
+├── Module-1_Frontend/           # Milestone 1: Client Application Layer
+│   ├── index.html               # Semantic portal entry-point & modern authentication gate
+│   ├── help.html                # Detached secondary documentation resource 
+│   ├── css/
+│   │   └── styles.css           # Grid controls, CSS3 columns, resets, and typography
+│   └── js/
+│       └── main.js              # State arrays, DOM validation, and mock AJAX streams
+│
+├── Module-2_Database/           # Milestone 2: Data Persistent Layer
+│   └── queries.sql              # The 25 mandatory queries extracted from MySQL Workbench
+│
+└── Module-3_Java_Backend/       # Milestone 3: Algorithmic Core Logic Layer
+      ├── HelloWorld.java
+      ├── SimpleCalculator.java
+      └── ...                    # Rest of the 41 programmatic core Java solution files
