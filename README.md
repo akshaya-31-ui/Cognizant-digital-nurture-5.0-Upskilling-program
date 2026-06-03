@@ -14,7 +14,7 @@ The repository is organized directly around the recommended learning sequence tr
 3. **Module 3 (Core Backend Engine):** 41 Object-Oriented Java programmatic assignments[cite: 2].
 
 ## Repository Folder Structure
-
+```
 Digital-Nurture-JavaFSE/
 │
 ├── .gitignore                   # Prevents IDE caches, compiled binaries, and .class files
